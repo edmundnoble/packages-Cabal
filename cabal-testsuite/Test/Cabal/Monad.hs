@@ -185,7 +185,7 @@ unexpectedSuccessExitCode :: Int
 unexpectedSuccessExitCode = 66
 
 catchSkip :: IO a -> IO a -> IO a
-catchSkip m r = m `E.catch` \e ->
+catchSkip m !r = m `E.catch` \e ->
                 case e of
                     ExitFailure c | c == skipExitCode
                         -> r

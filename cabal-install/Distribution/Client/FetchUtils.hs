@@ -84,7 +84,7 @@ isFetched loc = case loc of
     RemoteTarballPackage _uri local -> return (isJust local)
     RepoTarballPackage repo pkgid _ -> doesFileExist (packageFile repo pkgid)
     RemoteSourceRepoPackage _ local -> return (isJust local)
-    
+
 
 -- | Checks if the package has already been fetched (or does not need
 -- fetching) and if so returns evidence in the form of a 'PackageLocation'
@@ -267,7 +267,7 @@ waitAsyncFetchPackage :: Verbosity
                       -> AsyncFetchMap
                       -> UnresolvedPkgLoc
                       -> IO ResolvedPkgLoc
-waitAsyncFetchPackage verbosity downloadMap srcloc =
+waitAsyncFetchPackage !verbosity downloadMap srcloc =
     case Map.lookup srcloc downloadMap of
       Just hnd -> do
         debug verbosity $ "Waiting for download of " ++ show srcloc
